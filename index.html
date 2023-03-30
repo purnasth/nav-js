@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <style>
+      /* @import url('https://fonts.cdnfonts.com/css/classical-romance'); */
+
+      ::-webkit-scrollbar {
+        width: 0;
+      }
+
+      @import url("https://fonts.cdnfonts.com/css/moguine-serif-personal-use");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* font-family: "Poppins", sans-serif; */
+        min-height: 200vh;
+        background-color: #000;
+        /* font-family: 'Classical Romance', sans-serif; */
+        font-family: "Moguine Serif PERSONAL USE", sans-serif;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* justify-content: space-between; */
+        /* background: #e8e8e8; */
+        transition: all 0.3s ease-in-out;
+      }
+      /* header.sticky {
+        background-color: red;
+      } */
+
+      .navbar {
+        display: flex;
+        /* justify-content: space-between;
+        align-items: center; */
+        padding: 15px;
+        height: 70px;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+      }
+      .navbar.sticky {
+        background-color: #fff;
+        border-radius: 20px;
+        /* box-shadow: 0 20px 15px #000; */
+      }
+      .navbar.sticky a {
+        color: #000;
+      }
+
+      .navbar ul {
+        display: flex;
+        list-style: none;
+      }
+
+      .navbar ul li {
+        margin: 0.5em 1rem;
+      }
+
+      .navbar ul li a {
+        text-decoration: none;
+        color: #e8e8e8;
+        /* text-transform: uppercase; */
+        /* padding: 1rem 2rem; */
+        padding: 10px 20px;
+        /* border: unset; */
+        border-radius: 10px;
+        z-index: 1;
+        position: relative;
+        font-weight: 1000;
+        font-size: 1.25rem;
+        letter-spacing: 2px;
+        transition: all 250ms;
+        overflow: hidden;
+      }
+
+      .navbar ul li a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 10px;
+        background-color: #000;
+        z-index: -1;
+        transition: all 250ms;
+      }
+
+      .navbar ul li a:hover {
+        color: #e8e8e8;
+      }
+
+      .navbar ul li a:hover::before {
+        width: 100%;
+      }
+
+      .logo {
+        padding: 0 20px;
+        font-size: 1.5rem;
+        font-weight: 1000;
+        letter-spacing: 2px;
+        /* background-color: red; */
+        text-decoration: none;
+        position: relative;
+      }
+
+      .logo img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 7px 0 0 5px;
+        border: solid 6px;
+        border-color: #000;
+        transition: border-color 0.1s ease-in-out;
+      }
+
+      .navbar.sticky .logo img {
+        border-color: #000;
+      }
+
+      .navbar.sticky .logo::before {
+        content: "";
+        position: absolute;
+        bottom: 0%;
+        top: 40.25px;
+        left: 10px;
+        width: 15px;
+        height: 15px;
+        background-color: transparent;
+        border-bottom-right-radius: 15px;
+        box-shadow: 3px 3px 0 3px #000;
+      }
+      .navbar.sticky .logo::after {
+        content: "";
+        position: absolute;
+        bottom: 0%;
+        top: 40.25px;
+        right: 5px;
+        width: 15px;
+        height: 15px;
+        background-color: transparent;
+        border-bottom-left-radius: 15px;
+        box-shadow: -3px 3px 0 3px #000;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        z-index: 9999;
+      }
+      .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #000;
+        margin: 6px 0;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-12.5px);
+      }
+      .hamburger.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-12.5px);
+      }
+
+      header > .logo {
+        display: none;
+      }
+
+      @media screen and (max-width: 568px) {
+        body {
+          background-color: #cecece;
+        }
+        .hamburger {
+          display: block;
+          /* padding-left: 200px; */
+        }
+
+        header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: fixed;
+        }
+        .logo img {
+          border: none;
+          transform: scale(0.7);
+        }
+        header > .logo {
+          display: block;
+        }
+
+        header .navbar .logo {
+          display: none;
+        }
+
+        .navbar.sticky {
+          background-color: transparent;
+          /* border-radius: 0; */
+        }
+
+        .navbar ul {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          position: absolute;
+          /* width: min(70%, 300px); */
+          width: 250px;
+          height: 100vh;
+          gap: 0;
+          top: -18%;
+          right: -500%;
+          /* right: 100px; */
+          backdrop-filter: blur(50px);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+          /* z-index: -1; */
+          transition: all 0.5s;
+        }
+
+        .navbar ul.active {
+          right: 0%;
+          z-index: 999;
+        }
+
+        .navbar ul li {
+          display: block;
+          width: 100%;
+          /* background-color: purple; */
+          text-align: center;
+          padding: 30px;
+        }
+        .navbar ul li a {
+          display: block;
+          font-size: 1.5rem;
+          /* background-color: pink; */
+        }
+      }
+
+      /* #hero {
+        height: 100vh;
+        background-image: url("https://scontent.fktm7-1.fna.fbcdn.net/v/t1.6435-9/127045174_1123351118094348_7606127520669074565_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=174925&_nc_ohc=oTfmyDdk4-YAX_UrfYr&_nc_ht=scontent.fktm7-1.fna&oh=00_AfAjiHzenFRAOsTaHMsm9oso5N_Aj2Poe5GtGW7BciMXHQ&oe=644CA4F1");
+
+        background-image: url("./purnaa-transformed.jpg");
+
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin-top: -75px;
+      }
+      */
+      /* #hero img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.2)
+        );
+      } */
+
+      #hero img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        margin-top: -75px;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0.1)
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <header id="nav-header">
+      <h2 class="logo">
+        <a href="#">
+          <img
+            src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/98033188_969754356787359_659998261347614720_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_ohc=Tzi-yJL2KSwAX_5BbhK&_nc_ht=scontent.fktm10-1.fna&oh=00_AfCo-HDyJ1pnmUSSKJy0ZhkZlg9RrbtokuN83pg-MYOpDA&oe=644A1DFA"
+            alt="logo"
+          />
+        </a>
+      </h2>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <h2 class="logo">
+            <a href="#">
+              <img
+                src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.6435-9/98033188_969754356787359_659998261347614720_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_ohc=Tzi-yJL2KSwAX_5BbhK&_nc_ht=scontent.fktm10-1.fna&oh=00_AfCo-HDyJ1pnmUSSKJy0ZhkZlg9RrbtokuN83pg-MYOpDA&oe=644A1DFA"
+                alt="logo"
+              />
+            </a>
+          </h2>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <section id="hero">
+      <div class="parallax">
+        <img src="./parallax/sky.webp" alt="sky" id="sky" />
+        <img src="./parallax/bushes1.png" alt="bushes1" id="bushes1" />
+        <img src="./parallax/purna.png" alt="main-bg" id="mainBg" />
+        <img src="./parallax/bushestop.png" alt="bushes-top" id="bushesTop" />
+        <img src="./parallax/bulb.png" alt="bulb" id="bulb" />
+
+        <div class="overlay"></div>
+      </div>
+    </section>
+
+    <script>
+      // window.addEventListener("scroll", function() {
+      //   var header = document.querySelector("header");
+      //   header.classList.toggle("sticky", window.scrollY > 0);
+      // });
+
+      const header = document.querySelector(".navbar");
+
+      const sticky = header.offsetTop;
+
+      function stickyHeader() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
+      window.addEventListener("scroll", stickyHeader);
+
+      let hamburger = document.querySelector(".hamburger");
+      let navbar = document.querySelector(".navbar ul");
+
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navbar.classList.toggle("active");
+      });
+
+      // parallax for the hero section
+      // const sky = document.getElementById("sky");
+      // const bushes1 = document.getElementById("bushes1");
+      // const mainBg = document.getElementById("mainBg");
+      // const bushesTop = document.getElementById("bushesTop");
+      // const bulb = document.getElementById("bulb");
+
+      // window.addEventListener("scroll", () => {
+        // let value = window.scrollY;
+        // sky.style.bottom = 50 + value * 1 + "%";
+        // bushes1.style.top = value * 0.5 + "%";
+        // mount.style.top = value * 0.15 + "%";
+        // base.style.top = value * 0.05 + "%";
+        // let scaleValue = 0.35 + value * 0.001;
+        // bulb.style.transform = `scale(${scaleValue})`;
+
+        // text.style.top = 50 + value * -0.25 + "%";
+        // btn.style.bottom = 50 + value * -0.5 + "%";
+
+        // if (scaleValue >= 0.75) {
+        //   bulb.style.transition =
+        //     "display 0.5s ease-out, transform 0.05s ease-out";
+        //   bulb.style.display = "none";
+        // } else {
+        //   bulb.style.transition =
+        //     "display 0.5s ease-in, transform 0.05s ease-in";
+        //   bulb.style.display = "block";
+        // }
+
+      //   let value = window.scrollY;
+      //   sky.style.bottom = 50 + value * 0.35 + "%";
+      //   bushes1.style.left = value * -0.5 + "%";
+      //   mainBg.style.top = value * 0.15 + "%";
+      //   bushesTop.style.top = value * -0.15 + "%";
+      //   bulb.style.top = value * 1 + "%";
+      // });
+    </script>
+  </body>
+</html>
